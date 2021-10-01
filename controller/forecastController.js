@@ -1,11 +1,18 @@
-import axios from 'axios';
+const axios = require("axios");
+const settings = require("../settings");
 
 const getForecast = async (req, res) => {
   try {
-    const fetch_response = await axios.get(`${process.env.OPEN_WEATHER_BASE_URL}forecast?zip${process.env.}&appid=${}`);
-  } catch (err) {
+    const fetch_response = await axios.get(
+      `${settings.weather.base_url}forecast?zip${10013}&appid=${
+        settings.weather.api_key
+      }`
+    );
 
+    console.log(fetch_response)
+  } catch (err) {
+    console.log(err)
   }
 };
 
-module.export = getForecast;
+module.exports = getForecast;

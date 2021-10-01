@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const api = require("./api");
 const helmet = require("helmet");
 const cors = require("cors");
 
@@ -12,6 +13,9 @@ app.use(
     allowedHeaders: ["Origin", "Content-Type", "Accept"],
   })
 );
+
+// api routes
+app.use(api);
 
 app.get("/", (req, res) => {
   res.status(404).send({ error: { message: "Page Not Found" } });
