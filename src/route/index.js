@@ -1,8 +1,8 @@
 const express = require("express");
-const weatherRouter = require("./weather");
+const forecastRouter = require("./forecast");
 
 const router = express.Router();
 
-router.use(weatherRouter);
+router.use(forecastRouter);
 
 export default router;
