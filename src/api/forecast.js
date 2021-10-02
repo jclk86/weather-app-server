@@ -8,9 +8,9 @@ const forecastRouter = express.Router();
  * route all calls through this to try and handle errors
  */
 
-const use = (fn) => (req, res, next) =>
+const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
-
-forecastRouter.get("/forecast", use(forecastController));
+// get or post?
+forecastRouter.get("/forecast", asyncHandler(forecastController));
 
 module.exports = forecastRouter;

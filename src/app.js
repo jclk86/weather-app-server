@@ -3,6 +3,9 @@ const app = express();
 const api = require("./api");
 const helmet = require("helmet");
 const cors = require("cors");
+const logger = require("morgan");
+
+app.use(logger("dev"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +26,7 @@ app.get("/", (req, res) => {
 
 app.use(function errorHandler(error, req, res, next) {
   let response;
-  if (NODE_ENV === "production") {
+  if (process.env.NODE_ENV === "production") {
     response = { error: { message: "server error" } };
   } else {
     console.error(error);
