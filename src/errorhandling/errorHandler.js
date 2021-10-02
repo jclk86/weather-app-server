@@ -10,7 +10,7 @@ const sendErrorDev = (err, res) => {
 
 // Production
 const sendErrorProd = (err, res) => {
-  // Operational Error: send message to client
+  // Operational Error: send message to client - AppError 
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
