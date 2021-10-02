@@ -4,6 +4,9 @@ const api = require("./api");
 const helmet = require("helmet");
 const cors = require("cors");
 const logger = require("morgan");
+const errorHandler = require("./errorhandling/errorHandler");
+const AppError = require("./errorhandling/AppError");
+const settings = require("./settings");
 
 app.use(logger("dev"));
 
@@ -12,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: settings.client_origin,
     allowedHeaders: ["Origin", "Content-Type", "Accept"],
   })
 );
@@ -20,19 +23,10 @@ app.use(
 // api routes
 app.use(api);
 
-app.get("/", (req, res) => {
-  res.status(404).send({ error: { message: "Page Not Found" } });
+app.use((req, res, next) => {
+  next(new AppError("Not Found.", 404));
 });
 
-app.use(function errorHandler(error, req, res, next) {
-  let response;
-  if (process.env.NODE_ENV === "production") {
-    response = { error: { message: "server error" } };
-  } else {
-    console.error(error);
-    response = { message: error.message, error };
-  }
-  res.status(500).json(response);
-});
+app.use(errorHandler);
 
 module.exports = app;
