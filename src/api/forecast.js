@@ -5,6 +5,6 @@ const { catchAsync } = require("./utilities");
 const forecastRouter = express.Router();
 
 // get or post?
-forecastRouter.get("/forecast/:zipCode", catchAsync(forecastController));
+forecastRouter.get("/api/forecast/:zipCode", catchAsync(forecastController));
 
 module.exports = forecastRouter;
