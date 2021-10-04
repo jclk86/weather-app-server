@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon --config nodemon.json src/server.js",
-    "test": "node_modules/.bin/mocha --require test/setup.js --watch"
+    "test": "node_modules/.bin/mocha --require test/setup.js"
   },
   "dependencies": {
     "axios": "^0.21.4",
