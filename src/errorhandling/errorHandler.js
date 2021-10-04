@@ -10,7 +10,7 @@ const sendErrorDev = (err, res) => {
 
 // Production
 const sendErrorProd = (err, res) => {
-  // Operational Error: send message to client - AppError 
+  // Operational Error: send message to client - AppError
   if (err.isOperational) {
     res.status(err.statusCode).json({
       status: err.status,
@@ -23,7 +23,7 @@ const sendErrorProd = (err, res) => {
     console.error("ERROR 💥: ", err);
 
     // 2) Send generic message
-    res.status(500).json({
+    res.status(500).send({
       status: "error",
       message: "Something went very wrong!",
     });
