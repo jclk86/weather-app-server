@@ -1,6 +1,6 @@
 // Dev
 const sendErrorDev = (err, res) => {
-  res.status(err.statusCode).json({
+  res.status(err.statusCode).send({
     status: err.status,
     error: err,
     message: err.message,
@@ -12,7 +12,7 @@ const sendErrorDev = (err, res) => {
 const sendErrorProd = (err, res) => {
   // Operational Error: send message to client - AppError
   if (err.isOperational) {
-    res.status(err.statusCode).json({
+    res.status(err.statusCode).send({
       status: err.status,
       message: err.message,
     });
